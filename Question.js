@@ -21,13 +21,13 @@ class AbstractInput {
             if (event.key === 'Enter') {
                 const value = event.target.value;
                 this.input = value;
+                this.toDatabase(value);
                 this.update();
             }
         });
     }
     update() {
         this.element.value = "";
-        this.toDatabase(value);
     }
 
     toDatabase() {
