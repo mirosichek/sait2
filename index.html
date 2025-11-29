@@ -14,7 +14,13 @@
 <body>
 
     <h2>Вопрос:</h2>
-   <input type="text" id="myQuestion" placeholder="Напишите вопрос" oninput="savedValue.update()">
+   <input 
+  type="text" 
+  id="myQuestion" 
+  placeholder="Напишите вопрос"
+  onkeydown="if(event.key === 'Enter') savedValue.update()"
+/>
+
 
     <!-- <h3>Варианты ответа: </h3>
     <input type="text" id="Answer" placeholder="Ответ" oninput="save()">
@@ -22,19 +28,5 @@
     <div id="result"></div> -->
 
     <script src="Question.js"></script>
-
-    <script>
-  
-  async function test() {
-  const { data, error } = await supabase
-    .from("Questions")
-    .insert({ id: 3, Question: "Тест" });
-
-  console.log("data:", data);
-  console.log("error:", error);
-}
-  test();
-</script>
-<button onclick="test()">Add</button>
 </body>
 </html>
