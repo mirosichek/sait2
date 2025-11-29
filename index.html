@@ -26,13 +26,13 @@
     <script>
   
   async function test() {
-    const { error } = await supabase
-      .from("Questions")
-      .insert({id:1, Question: "Тест2" });
+  const { data, error } = await supabase
+    .from("Questions")
+    .insert({ id: 1, Question: "Тест" });
 
-    console.log("error:", error);
-  }
-
+  console.log("data:", data);
+  console.log("error:", error);
+}
   test();
 </script>
 <button onclick="test()">Add</button>
