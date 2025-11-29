@@ -39,7 +39,7 @@ class Question extends AbstractInput {
     async toDatabase() {
         const { error } = await supabase
             .from('Questions')
-            .insert({ name: this.input });
+            .insert({id:1, Вопрос: this.input });
 
         if (error) console.error(error);
     }
