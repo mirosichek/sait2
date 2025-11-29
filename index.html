@@ -28,7 +28,7 @@
   async function test() {
     const { error } = await supabase
       .from("Questions")
-      .insert({id:1, Question: "Тест" });
+      .insert({id:1, Question: "Тест2" });
 
     console.log("error:", error);
   }
