@@ -22,5 +22,18 @@
     <div id="result"></div> -->
 
     <script src="Question.js"></script>
+
+    <script>
+  
+  async function test() {
+    const { error } = await supabase
+      .from("Questions")
+      .insert({id:1, Вопрос: "Тест" });
+
+    console.log("error:", error);
+  }
+
+  test();
+</script>
 </body>
 </html>
