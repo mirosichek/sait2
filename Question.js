@@ -24,10 +24,6 @@ class AbstractInput {
     toDatabase() {
         throw new Error("Метод toDatabase() должен быть реализован в наследнике");
     }
-
-    save() {
-        throw new Error("Метод save() должен быть реализован в наследнике");
-    }
 }
 
 
@@ -40,12 +36,7 @@ class Question extends AbstractInput {
         const { error } = await supabase
             .from('Questions')
             .insert({ Question: this.input });
-
         if (error) console.error(error);
-    }
-
-    save() {
-        console.log("Сохранено:", this.input);
     }
 }
 
