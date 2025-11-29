@@ -6,19 +6,20 @@
     <title>My Telegram Mini App</title>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <h2>Вопрос:</h2>
-    <input type="text" id="myQuestion" placeholder="Напишите вопрос" oninput="save()">
-    <button onclick="save()">Сохранить</button> 
+   <input type="text" id="myQuestion" placeholder="Напишите вопрос" oninput="savedValue.update()">
 
-    <h3>Варианты ответа: </h3>
+    <!-- <h3>Варианты ответа: </h3>
     <input type="text" id="Answer" placeholder="Ответ" oninput="save()">
 
-    <div id="result"></div>
+    <div id="result"></div> -->
 
     <script src="Question.js"></script>
 </body>
