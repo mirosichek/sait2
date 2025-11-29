@@ -6,41 +6,50 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 
 class AbstractInput {
-    constructor(Id) {
+    constructor(elementId) {
         if (new.target === AbstractInput) {
             throw new Error("Нельзя создавать экземпляры абстрактного класса");
         }
-        this.Id = Id;
+        this.elementId = elementId;
+        this.element = document.getElementById(elementId);
         this.input = "";
+        this.setupEventListener();
     }
 
+    setupEventListener() {
+        this.element.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const value = event.target.value;
+                this.input = value;
+                this.update();
+            }
+        });
+    }
     update() {
-        this.input = document.getElementById(this.Id).value;
-
-        this.toDatabase();
-        this.save();
+        this.element.value = "";
+        this.toDatabase(value);
     }
 
     toDatabase() {
         throw new Error("Метод toDatabase() должен быть реализован в наследнике");
     }
-}
 
+}
 
 class Question extends AbstractInput {
     constructor() {
         super("myQuestion");
     }
 
-    async toDatabase() {
+    async toDatabase(question) {
         const { error } = await supabase
             .from('Questions')
-            .insert({ Question: this.input });
+            .insert({ Question: question });
         if (error) console.error(error);
+        else console.log("Вопрос сохранен в БД:", question);
     }
 }
 
 const savedValue = new Question();
-
 
 
