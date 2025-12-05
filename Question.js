@@ -7,16 +7,8 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 class Question {
     constructor(elementId) {
-        document.addEventListener("DOMContentLoaded", () => {
             this.element = document.getElementById(elementId);
-
-            if (!this.element) {
-               alert(`Элемент с id="${elementId}" не найден.`);
-                return;
-            }
-
             this.setupEventListener();
-        });
     }
 
     setupEventListener() {
