@@ -11,7 +11,7 @@ class Question {
             this.element = document.getElementById(elementId);
 
             if (!this.element) {
-                console.error(`Элемент с id="${elementId}" не найден.`);
+               alert(`Элемент с id="${elementId}" не найден.`);
                 return;
             }
 
@@ -37,9 +37,9 @@ class Question {
             .insert({ Question: question });
 
         if (error) {
-            console.error("Ошибка сохранения в БД:", error);
+            alert("Ошибка сохранения в БД:", error);
         } else {
-            console.log("Вопрос сохранён в БД:", question);
+            alert("Вопрос сохранён в БД:", question);
         }
     }
 }
