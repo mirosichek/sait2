@@ -14,9 +14,8 @@ class Question {
     setupEventListener() { 
         this.element.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
-                const answer = event.target.value.trim();
-                console.log("Ответ:", answer);
-
+                const question = event.target.value;
+                this.toDatabase(question);
                 event.target.value = "";
             }
         });
