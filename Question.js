@@ -57,7 +57,7 @@ class Question extends AbstractInput {
         return;
     }
 
-    const container = document.getElementById("inputContainer");
+    const container = document.getElementById("inputAnsverContainer");
     container.innerHTML = "";
 
     for (let i = 0; i < count; i++) {
@@ -67,12 +67,13 @@ class Question extends AbstractInput {
 
         input.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
-                saveAnswer(event.target.value);
+               const saveAnswer=event.target.value;
                 event.target.value = "";
             }
         });
 
         container.appendChild(input);
+        container.appendChild(document.createElement("br"));
         container.appendChild(document.createElement("br"));
     }
 }
