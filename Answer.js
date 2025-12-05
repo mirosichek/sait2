@@ -1,44 +1,3 @@
-// === ИНИЦИАЛИЗАЦИЯ SUPABASE ===
-const supabaseUrl = 'https://zxdprwvrgzqpxyvxksud.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4ZHByd3ZyZ3pxcHh5dnhrc3VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MDI5NjQsImV4cCI6MjA3OTA3ODk2NH0.Rd8UXhHz97ifIrSezDkcBNzBn18_wAVtY_mUVCf32FE';
-
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-
-let currentQuestionId = null;
-
-class Question {
-    constructor(elementId) {
-        this.element = document.getElementById(elementId);
-        this.setupEventListener();
-    }
-
-    setupEventListener() {
-        this.element.addEventListener("keydown", async (event) => {
-            if (event.key === "Enter") {
-                const question = event.target.value.trim();
-                if (!question) return;
-
-                const { data, error } = await supabase
-                    .from('QuestionAnswer')
-                    .insert({ Question: question })
-                    .select("id")
-                    .single();
-
-                if (error) {
-                    alert("Ошибка сохранения вопроса: " + error.message);
-                    return;
-                }
-
-                currentQuestionId = data.id;   // <-- сохраняем ID
-                event.target.value = "";
-            }
-        });
-    }
-}
-
-
-
 class Answer {
     constructor(containerId, countInputId) {
         this.container = document.getElementById(containerId);
@@ -93,7 +52,3 @@ class Answer {
         }
     }
 }
-
-
-new Question('myQuestion');
-const answer = new Answer('inputAnsverContainer', 'inputCount');
