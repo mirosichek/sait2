@@ -5,12 +5,38 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 
-class AbstractInput {
-    constructor(elementId) {
-        if (new.target === AbstractInput) {
-            throw new Error("Нельзя создавать экземпляры абстрактного класса");
-        }
-        this.elementId = elementId;
+// class AbstractInput {
+//     constructor(elementId) {
+//         if (new.target === AbstractInput) {
+//             throw new Error("Нельзя создавать экземпляры абстрактного класса");
+//         }
+//         this.elementId = elementId;
+//         this.element = document.getElementById(elementId);
+//         this.input = "";
+//         this.setupEventListener();
+//     }
+
+//     setupEventListener() {
+//         this.element.addEventListener('keydown', (event) => {
+//             if (event.key === 'Enter') {
+//                 const value = event.target.value;
+//                 this.input = value;
+//                 this.toDatabase(value);
+//             }
+//         });
+//     }
+//     update() {
+//         this.element.value = "";
+//     }
+
+//     toDatabase() {
+//         throw new Error("Метод toDatabase() должен быть реализован в наследнике");
+//     }
+// }
+
+class Question{
+    constructor() {
+         this.elementId = elementId;
         this.element = document.getElementById(elementId);
         this.input = "";
         this.setupEventListener();
@@ -27,16 +53,6 @@ class AbstractInput {
     }
     update() {
         this.element.value = "";
-    }
-
-    toDatabase() {
-        throw new Error("Метод toDatabase() должен быть реализован в наследнике");
-    }
-}
-
-class Question extends AbstractInput {
-    constructor() {
-        super("myQuestion");
     }
 
     async toDatabase(question) {
