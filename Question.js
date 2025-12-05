@@ -48,7 +48,7 @@ class Question extends AbstractInput {
     }
 }
 
-class Answer extends AbstractInput {
+class Answer {
     addInputs() {
         let count = parseInt(document.getElementById("inputCount").value);
         if (!count || count < 1 || count > 10) {
