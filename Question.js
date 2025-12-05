@@ -11,13 +11,16 @@ class Question {
     }
 
     setupEventListener() { 
-        this.element.addEventListener('keydown', (event) => { 
-        if (event.key === 'Enter') { 
-            const value = event.target.value; 
-            this.input = value; 
-            this.toDatabase(value); 
-        } });
-     }
+        this.element.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                const answer = event.target.value.trim();
+                console.log("Ответ:", answer);
+
+                event.target.value = "";
+            }
+        });
+    }
+    
     async toDatabase(question) {
         const { error } = await supabase
             .from('Questions')
