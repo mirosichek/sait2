@@ -8,6 +8,7 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 class Question {
     constructor(elementId) {
             this.element = document.getElementById(elementId);
+            this.setupEventListener();
     }
 
     setupEventListener() { 
@@ -20,7 +21,7 @@ class Question {
             }
         });
     }
-    
+
     async toDatabase(question) {
         const { error } = await supabase
             .from('Questions')
