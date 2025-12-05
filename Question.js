@@ -12,7 +12,7 @@ class Question {
     }
 
     setupEventListener() {
-        this.element.addEventListener("keydow", (event) => {
+        this.element.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
                 const value = event.target.value;
                 if (!value) return;
@@ -68,6 +68,4 @@ function addInputs() {
     }
 }
 
-
-// === СОЗДАНИЕ ОБЪЕКТА ВОПРОСА ===
 new Question('myQuestion');
