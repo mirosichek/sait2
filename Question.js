@@ -35,8 +35,14 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 // }
 
 class Question {
-    constructor() {
-        this.element = document.getElementById(myQuestion);
+    constructor(elementId) {
+        this.element = document.getElementById(elementId);
+
+        if (!this.element) {
+            console.error(`Элемент с id="${elementId}" не найден.`);
+            return;
+        }
+
         this.input = "";
         this.setupEventListener();
     }
@@ -44,7 +50,10 @@ class Question {
     setupEventListener() {
         this.element.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                const value = event.target.value;
+                const value = event.target.value.trim();
+
+                if (!value) return;
+
                 this.input = value;
                 this.toDatabase(value);
                 this.update();
@@ -60,8 +69,12 @@ class Question {
         const { error } = await supabase
             .from('Questions')
             .insert({ Question: question });
-        if (error) console.error(error);
-        else console.log("Вопрос сохранён в БД:", question);
+
+        if (error) {
+            console.error("Ошибка сохранения в БД:", error);
+        } else {
+            console.log("Вопрос сохранён в БД:", question);
+        }
     }
 }
 
@@ -95,6 +108,6 @@ class Question {
         container.appendChild(document.createElement("br"));
     }
 }
-const savedValue = new Question();
+const savedValue = new Question('myQuestion');
 
 
