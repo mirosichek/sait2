@@ -36,7 +36,7 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 class Question{
     constructor() {
-         this.elementId = elementId;
+         this.elementId = myQuestion;
         this.element = document.getElementById(elementId);
         this.input = "";
         this.setupEventListener();
