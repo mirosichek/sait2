@@ -23,27 +23,6 @@
 
     <h3>Варианты ответа: </h3>
     <div id="inputContainer"></div>
-    <!-- <script>
-        $(document).ready(function(){
-  $('#addButton').click(function(){
-    var numberOfInputsToAdd = parseInt($('#inputCount').val());
-    if (numberOfInputsToAdd > 0 && numberOfInputsToAdd <= 10) {
-      var $container = $('#inputContainer');
-      $container.empty(); // Очищаем контейнер перед добавлением новых элементов
-      for(let i = 0; i < numberOfInputsToAdd; i++) {
-        $('<input>')
-          .attr({
-            type: 'text',
-            name: `input_${i}`,
-             placeholder: `Ввод ${i + 1}`
-          })
-          .appendTo($container); // Добавляем новые поля ввода
-        $('<br>').appendTo($container);
-      }
-    }
-  });
-});
-    </script> -->
     <button onclick="saveAnswer.addInputs()">Добавить поля</button>
     <script src="Question.js"></script>
 </body>
