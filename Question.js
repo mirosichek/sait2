@@ -5,33 +5,38 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 
+let currentQuestionId = null;
+
 class Question {
     constructor(elementId) {
-            this.element = document.getElementById(elementId);
-            this.setupEventListener();
+        this.element = document.getElementById(elementId);
+        this.setupEventListener();
     }
 
-    setupEventListener() { 
-        this.element.addEventListener("keydown", (event) => {
+    setupEventListener() {
+        this.element.addEventListener("keydown", async (event) => {
             if (event.key === "Enter") {
-                const question = event.target.value;
-                this.toDatabase(question);
+                const question = event.target.value.trim();
+                if (!question) return;
+
+                const { data, error } = await supabase
+                    .from('QuestionAnswer')
+                    .insert({ Question: question })
+                    .select("id")
+                    .single();
+
+                if (error) {
+                    alert("Ошибка сохранения вопроса: " + error.message);
+                    return;
+                }
+
+                currentQuestionId = data.id;   // <-- сохраняем ID
+                event.target.value = "";
             }
         });
     }
-
-    async toDatabase(question) {
-        const { error } = await supabase
-            .from('QuestionAnswer')
-            .insert({ Question: question })
-            .select("id")
-             .single();
-
-        if (error) {
-            alert("Ошибка сохранения в БД:", error);
-        }
-    }
 }
+
 
 
 class Answer {
@@ -55,10 +60,18 @@ class Answer {
             input.type = "text";
             input.placeholder = `Ответ ${i + 1}`;
 
-            input.addEventListener("keydown", (event) => {
+            input.addEventListener("keydown", async (event) => {
                 if (event.key === "Enter") {
+
+                    if (!currentQuestionId) {
+                        alert("Сначала напишите вопрос и нажмите Enter!");
+                        return;
+                    }
+
                     const answer = event.target.value.trim();
-                    this.toDatabase(answer);
+                    if (!answer) return;
+
+                    await this.toDatabase(answer);
                     event.target.value = "";
                 }
             });
@@ -66,20 +79,21 @@ class Answer {
             this.container.appendChild(input);
             this.container.appendChild(document.createElement("br"));
             this.container.appendChild(document.createElement("br"));
-            
         }
     }
-async toDatabase(answer) {
+
+    async toDatabase(answer) {
         const { error } = await supabase
             .from('QuestionAnswer')
             .update({ Answer: answer })
             .eq("id", currentQuestionId);
 
         if (error) {
-            alert("Ошибка сохранения в БД:", error);
+            alert("Ошибка сохранения ответа: " + error.message);
         }
     }
 }
+
 
 new Question('myQuestion');
 const answer = new Answer('inputAnsverContainer', 'inputCount');
