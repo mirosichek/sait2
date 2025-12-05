@@ -50,28 +50,32 @@ class Question extends AbstractInput {
 
 
    function addInputs() {
-  let numberOfInputs = parseInt(document.getElementById('inputCount').value);
-  if (isNaN(numberOfInputs) || numberOfInputs <= 0 || numberOfInputs > 10) {
-    alert('Введите корректное число от 1 до 10. В противном случае что-то может пойти не так!');
-    return;
-  }
+    const count = parseInt(document.getElementById("inputCount").value);
 
-  let container = document.getElementById('inputContainer'); // Это место для новых полей
-  while (container.hasChildNodes()) { 
-    container.removeChild(container.lastChild); // Освобождаем место от старых элементов
-  }
+    if (!count || count < 1 || count > 10) {
+        alert("Введите число от 1 до 10");
+        return;
+    }
 
-  for (let i = 0; i < numberOfInputs; i++) {
-    let input = document.createElement('input');
-    input.type = 'text';
-    input.name = `dynamicInput${i}`; // Имена для каждого поля для избежания ошибок
-    input.placeholder = `Ввод ${i + 1}`;
-    container.appendChild(input); // Добавляем новое поле в контейнер
-    container.appendChild(document.createElement('br')); // Предусматриваем дополнительное пространство между полями
-  }
+    const container = document.getElementById("inputContainer");
+    container.innerHTML = "";
+
+    for (let i = 0; i < count; i++) {
+        let input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = `Ответ ${i + 1}`;
+
+        input.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                saveAnswer(event.target.value);
+                event.target.value = "";
+            }
+        });
+
+        container.appendChild(input);
+        container.appendChild(document.createElement("br"));
+    }
 }
-
-
 const savedValue = new Question();
 
 

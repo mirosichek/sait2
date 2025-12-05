@@ -7,23 +7,21 @@
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <h2>Вопрос:</h2>
-   <input 
-  type="text" 
-  id="myQuestion" 
-  placeholder="Напишите вопрос"
-/>
+    <input type="text" id="myQuestion" placeholder="Напишите вопрос">
 
-    <h3>Варианты ответа: </h3>
+    <h3>Сколько вариантов ответа?</h3>
+    <input type="number" id="inputCount" min="1" max="10" placeholder="1–10">
+
+    <button onclick="addInputs()">Добавить поля</button>
+
+    <h3>Варианты ответа:</h3>
     <div id="inputContainer"></div>
-    <button onclick="saveAnswer.addInputs()">Добавить поля</button>
+
     <script src="Question.js"></script>
 </body>
 </html>
