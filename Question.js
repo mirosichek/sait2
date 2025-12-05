@@ -8,21 +8,16 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 class Question {
     constructor(elementId) {
             this.element = document.getElementById(elementId);
-            this.setupEventListener();
     }
 
-    setupEventListener() {
-        this.element.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                const value = event.target.value;
-                if (!value) return;
-
-                this.toDatabase(value);
-                this.element.value = "";
-            }
-        });
-    }
-
+    setupEventListener() { 
+        this.element.addEventListener('keydown', (event) => { 
+        if (event.key === 'Enter') { 
+            const value = event.target.value; 
+            this.input = value; 
+            this.toDatabase(value); 
+        } });
+     }
     async toDatabase(question) {
         const { error } = await supabase
             .from('Questions')
