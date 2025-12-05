@@ -12,8 +12,8 @@ class Question {
     }
 
     setupEventListener() {
-        this.element.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
+        this.element.addEventListener("keydow", (event) => {
+            if (event.key === "Enter") {
                 const value = event.target.value;
                 if (!value) return;
 
