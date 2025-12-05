@@ -73,4 +73,4 @@ class Answer {
 }
 
 new Question('myQuestion');
-new Answer('inputAnsverContainer','inputCount');
+const answer = new Answer('inputAnsverContainer', 'inputCount');
