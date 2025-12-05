@@ -1,39 +1,35 @@
-
-
+// === ИНИЦИАЛИЗАЦИЯ SUPABASE ===
 const supabaseUrl = 'https://zxdprwvrgzqpxyvxksud.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4ZHByd3ZyZ3pxcHh5dnhrc3VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MDI5NjQsImV4cCI6MjA3OTA3ODk2NH0.Rd8UXhHz97ifIrSezDkcBNzBn18_wAVtY_mUVCf32FE';
+
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 
+// === КЛАСС ДЛЯ СОХРАНЕНИЯ ВОПРОСА ===
 class Question {
     constructor(elementId) {
-        this.element = document.getElementById(elementId);
+        document.addEventListener("DOMContentLoaded", () => {
+            this.element = document.getElementById(elementId);
 
-        if (!this.element) {
-            console.error(`Элемент с id="${elementId}" не найден.`);
-            return;
-        }
+            if (!this.element) {
+                console.error(`Элемент с id="${elementId}" не найден.`);
+                return;
+            }
 
-        this.input = "";
-        this.setupEventListener();
+            this.setupEventListener();
+        });
     }
 
     setupEventListener() {
         this.element.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 const value = event.target.value.trim();
-
                 if (!value) return;
 
-                this.input = value;
                 this.toDatabase(value);
-                this.update();
+                this.element.value = "";
             }
         });
-    }
-
-    update() {
-        this.element.value = "";
     }
 
     async toDatabase(question) {
@@ -50,8 +46,8 @@ class Question {
 }
 
 
-
-   function addInputs() {
+// === ДОБАВЛЕНИЕ ИНПУТОВ ДЛЯ ОТВЕТОВ ===
+function addInputs() {
     const count = parseInt(document.getElementById("inputCount").value);
 
     if (!count || count < 1 || count > 10) {
@@ -63,13 +59,15 @@ class Question {
     container.innerHTML = "";
 
     for (let i = 0; i < count; i++) {
-        let input = document.createElement("input");
+        const input = document.createElement("input");
         input.type = "text";
         input.placeholder = `Ответ ${i + 1}`;
 
         input.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
-               const saveAnswer=event.target.value;
+                const answer = event.target.value.trim();
+                console.log("Ответ:", answer);
+
                 event.target.value = "";
             }
         });
@@ -79,6 +77,7 @@ class Question {
         container.appendChild(document.createElement("br"));
     }
 }
-const savedValue = new Question('myQuestion');
 
 
+// === СОЗДАНИЕ ОБЪЕКТА ВОПРОСА ===
+new Question('myQuestion');
