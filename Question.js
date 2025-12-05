@@ -35,35 +35,53 @@ class Question {
 }
 
 
-function addInputs() {
-    const count = parseInt(document.getElementById("inputCount").value);
-
-    if (!count || count < 1 || count > 10) {
-        alert("Введите число от 1 до 10");
-        return;
+class Answer {
+    constructor(containerId, countInputId) {
+        this.container = document.getElementById(containerId);
+        this.countInput = document.getElementById(countInputId);
     }
 
-    const container = document.getElementById("inputAnsverContainer");
-    container.innerHTML = "";
+    addInputs() {
+        const count = parseInt(this.countInput.value);
 
-    for (let i = 0; i < count; i++) {
-        const input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = `Ответ ${i + 1}`;
+        if (!count || count < 1 || count > 10) {
+            alert("Введите число от 1 до 10");
+            return;
+        }
 
-        input.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                const answer = event.target.value.trim();
-                console.log("Ответ:", answer);
+        this.container.innerHTML = "";
 
-                event.target.value = "";
-            }
-        });
+        for (let i = 0; i < count; i++) {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.placeholder = `Ответ ${i + 1}`;
 
-        container.appendChild(input);
-        container.appendChild(document.createElement("br"));
-        container.appendChild(document.createElement("br"));
+            input.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    const answer = event.target.value.trim();
+                    this.toDatabase(answer);
+                    event.target.value = "";
+                }
+            });
+
+            this.container.appendChild(input);
+            this.container.appendChild(document.createElement("br"));
+            this.container.appendChild(document.createElement("br"));
+        }
     }
+
+    // async toDatabase(answer) {
+    //     const { error } = await supabase
+    //         .from('Answers')
+    //         .insert({ Answer: answer });
+
+    //     if (error) {
+    //         alert("Ошибка сохранения в БД:", error);
+    //     } else {
+    //         alert("Ответ сохранён: " + answer);
+    //     }
+    // }
 }
 
 new Question('myQuestion');
+new Answer('inputAnsverContainer','inputCount');
