@@ -5,7 +5,6 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 
-// === КЛАСС ДЛЯ СОХРАНЕНИЯ ВОПРОСА ===
 class Question {
     constructor(elementId) {
         document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +22,7 @@ class Question {
     setupEventListener() {
         this.element.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                const value = event.target.value.trim();
+                const value = event.target.value;
                 if (!value) return;
 
                 this.toDatabase(value);
