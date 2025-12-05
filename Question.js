@@ -16,20 +16,17 @@ class Question {
             if (event.key === "Enter") {
                 const question = event.target.value;
                 this.toDatabase(question);
-                event.target.value = "";
             }
         });
     }
 
     async toDatabase(question) {
         const { error } = await supabase
-            .from('Questions')
+            .from('QuestionAnswer')
             .insert({ Question: question });
 
         if (error) {
             alert("Ошибка сохранения в БД:", error);
-        } else {
-            alert("Вопрос сохранён в БД:", question);
         }
     }
 }
@@ -67,9 +64,18 @@ class Answer {
             this.container.appendChild(input);
             this.container.appendChild(document.createElement("br"));
             this.container.appendChild(document.createElement("br"));
+            
         }
     }
+async toDatabase(answer) {
+        const { error } = await supabase
+            .from('QuestionAnswer')
+            .insert({ Answer: answer });
 
+        if (error) {
+            alert("Ошибка сохранения в БД:", error);
+        }
+    }
 }
 
 new Question('myQuestion');
