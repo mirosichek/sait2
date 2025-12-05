@@ -50,7 +50,7 @@ class Question extends AbstractInput {
 
 class Answer extends AbstractInput {
      constructor() {
-    super("Answer");
+    super("inputContainer");
      }
     async addInputs() {
   let numberOfInputs = parseInt(document.getElementById('inputCount').value);
@@ -73,13 +73,8 @@ class Answer extends AbstractInput {
     container.appendChild(document.createElement('br')); // Предусматриваем дополнительное пространство между полями
   }
 }
-
-
-
-
-     
 }
 
 const savedValue = new Question();
-
+const saveAnswer=new Answer();
 
