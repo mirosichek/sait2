@@ -23,7 +23,9 @@ class Question {
     async toDatabase(question) {
         const { error } = await supabase
             .from('QuestionAnswer')
-            .insert({ Question: question });
+            .insert({ Question: question })
+            .select("id")
+             .single();
 
         if (error) {
             alert("Ошибка сохранения в БД:", error);
@@ -70,7 +72,8 @@ class Answer {
 async toDatabase(answer) {
         const { error } = await supabase
             .from('QuestionAnswer')
-            .insert({ Answer: answer });
+            .update({ Answer: answer })
+            .eq("id", currentQuestionId);
 
         if (error) {
             alert("Ошибка сохранения в БД:", error);
