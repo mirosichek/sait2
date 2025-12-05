@@ -7,6 +7,7 @@
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,11 +21,30 @@
   placeholder="Напишите вопрос"
 />
 
-    <!-- <h3>Варианты ответа: </h3>
-    <input type="text" id="Answer" placeholder="Ответ" oninput="save()">
-
-    <div id="result"></div> -->
-
+    <h3>Варианты ответа: </h3>
+    <div id="inputContainer"></div>
+    <script>
+        $(document).ready(function(){
+  $('#addButton').click(function(){
+    var numberOfInputsToAdd = parseInt($('#inputCount').val());
+    if (numberOfInputsToAdd > 0 && numberOfInputsToAdd <= 10) {
+      var $container = $('#inputContainer');
+      $container.empty(); // Очищаем контейнер перед добавлением новых элементов
+      for(let i = 0; i < numberOfInputsToAdd; i++) {
+        $('<input>')
+          .attr({
+            type: 'text',
+            name: `input_${i}`,
+             placeholder: `Ввод ${i + 1}`
+          })
+          .appendTo($container); // Добавляем новые поля ввода
+        $('<br>').appendTo($container);
+      }
+    }
+  });
+});
+    </script>
+    <button onclick="addInputs()">Добавить поля</button>
     <script src="Question.js"></script>
 </body>
 </html>
