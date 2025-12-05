@@ -34,9 +34,9 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 //     }
 // }
 
-class Question{
+class Question {
     constructor() {
-         this.elementId = myQuestion;
+        this.elementId = myQuestion;
         this.element = document.getElementById(elementId);
         this.input = "";
         this.setupEventListener();
@@ -48,9 +48,11 @@ class Question{
                 const value = event.target.value;
                 this.input = value;
                 this.toDatabase(value);
+                this.update();
             }
         });
     }
+
     update() {
         this.element.value = "";
     }
@@ -60,9 +62,10 @@ class Question{
             .from('Questions')
             .insert({ Question: question });
         if (error) console.error(error);
-        else console.log("Вопрос сохранен в БД:", question);
+        else console.log("Вопрос сохранён в БД:", question);
     }
 }
+
 
 
    function addInputs() {
