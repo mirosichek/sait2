@@ -70,17 +70,6 @@ class Answer {
         }
     }
 
-    // async toDatabase(answer) {
-    //     const { error } = await supabase
-    //         .from('Answers')
-    //         .insert({ Answer: answer });
-
-    //     if (error) {
-    //         alert("Ошибка сохранения в БД:", error);
-    //     } else {
-    //         alert("Ответ сохранён: " + answer);
-    //     }
-    // }
 }
 
 new Question('myQuestion');
