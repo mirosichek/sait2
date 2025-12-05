@@ -3,3 +3,97 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
+class Database {
+    constructor(containerId, question, answer) {
+        this.container = document.getElementById(containerId);
+        this.question = question;
+        this.answer = answer;
+        this.currentQuestionId = null;
+        this.setupEventListener();
+    }
+
+    setupEventListener() {
+        this.container.addEventListener("keydown", async (event) => {
+            if (event.key === "Enter") {
+                await this.save();
+            }
+        });
+    }
+
+    async save() {
+        const q = this.question.getValue();
+        const a = this.answer.getValue();
+
+        await this.qtoDatabase(q);
+        await this.atoDatadase(a);
+    }
+
+    async qtoDatabase(question){
+        const { data, error } = await supabase
+            .from('Questions')
+            .insert({ Question: question })
+            .select("id")
+            .single();
+
+        if (error) {
+            alert("Ошибка сохранения вопроса: " + error.message);
+            return;
+        }
+
+        this.currentQuestionId = data.id;
+    }
+
+    async atoDatadase(answer){
+        for (let i = 0; i < answer.length; i++) {
+            const { error } = await supabase
+                .from('QuestionAnswer')
+                .insert({
+                    Answer: answer[i],
+                    Question: this.currentQuestionId
+                });
+
+            if (error) {
+                alert("Ошибка сохранения ответа: " + error.message);
+            }
+        }
+    }
+}
+
+
+// input.addEventListener("keydown", async (event) => {
+//                 if (event.key === "Enter") {
+
+//                     if (!currentQuestionId) {
+//                         alert("Сначала напишите вопрос и нажмите Enter!");
+//                         return;
+//                     }
+
+//                     const answer = event.target.value.trim();
+//                     if (!answer) return;
+
+//                     await this.toDatabase(answer);
+//                     event.target.value = "";
+//                 }
+//             });
+
+// const { data, error } = await supabase
+//                     .from('QuestionAnswer')
+//                     .insert({ Question: question })
+//                     .select("id")
+//                     .single();
+
+
+//               currentQuestionId = data.id;   // <-- сохраняем ID
+//                 event.target.value = "";
+
+//                 async toDatabase(answer) {
+//         const { error } = await supabase
+//             .from('QuestionAnswer')
+//             .update({ Answer: answer })
+//             .eq("id", currentQuestionId);
+
+//         if (error) {
+//             alert("Ошибка сохранения ответа: " + error.message);
+//         }
+//     }
+// // 

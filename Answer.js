@@ -2,6 +2,7 @@ class Answer {
     constructor(containerId, countInputId) {
         this.container = document.getElementById(containerId);
         this.countInput = document.getElementById(countInputId);
+        this.arr = [];
     }
 
     addInputs() {
@@ -12,6 +13,7 @@ class Answer {
             return;
         }
 
+        this.arr = []; 
         this.container.innerHTML = "";
 
         for (let i = 0; i < count; i++) {
@@ -19,36 +21,29 @@ class Answer {
             input.type = "text";
             input.placeholder = `Ответ ${i + 1}`;
 
-            input.addEventListener("keydown", async (event) => {
-                if (event.key === "Enter") {
-
-                    if (!currentQuestionId) {
-                        alert("Сначала напишите вопрос и нажмите Enter!");
-                        return;
-                    }
-
-                    const answer = event.target.value.trim();
-                    if (!answer) return;
-
-                    await this.toDatabase(answer);
-                    event.target.value = "";
-                }
+            input.addEventListener("input", () => {
+                this.arr[i] = input.value.trim();
             });
 
             this.container.appendChild(input);
             this.container.appendChild(document.createElement("br"));
-            this.container.appendChild(document.createElement("br"));
         }
     }
 
-    async toDatabase(answer) {
-        const { error } = await supabase
-            .from('QuestionAnswer')
-            .update({ Answer: answer })
-            .eq("id", currentQuestionId);
-
-        if (error) {
-            alert("Ошибка сохранения ответа: " + error.message);
-        }
+    getValue() {
+        return this.arr;
     }
 }
+
+
+    // async toDatabase(answer) {
+    //     const { error } = await supabase
+    //         .from('QuestionAnswer')
+    //         .update({ Answer: answer })
+    //         .eq("id", currentQuestionId);
+
+    //     if (error) {
+    //         alert("Ошибка сохранения ответа: " + error.message);
+    //     }
+    // }
+// }

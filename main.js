@@ -1,5 +1,3 @@
-// создаём класс вопроса
-const question = new Question("myQuestion");
-
-// создаём класс ответов
+window.question = new Question("myQuestion");
 window.answer = new Answer("inputAnsverContainer", "inputCount");
+window.db = new Database("qa", question, answer);

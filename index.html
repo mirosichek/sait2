@@ -10,14 +10,16 @@
 </head>
 
 <body>
+<button onclick="db.save()">Сохранить в базу данных</button>
 
+<div id="qa"> 
     <h2>Вопрос:</h2>
     <input type="text" id="myQuestion" placeholder="Напишите вопрос">
 
     <h3>Сколько вариантов ответа?</h3>
     <input type="number" id="inputCount" min="1" max="10" placeholder="1–10">
 
-    <button onclick="answer.addInputs()">Добавить поля</button>Ё
+    <button onclick="answer.addInputs()">Добавить поля</button>
 
     <h3>Варианты ответа:</h3>
     <div id="inputAnsverContainer"></div>
@@ -26,6 +28,7 @@
     <script src="Question.js"></script>
     <script src="Answer.js"></script>
     <script src="main.js"></script>
+</div>
 
 </body>
 </html>
