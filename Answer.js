@@ -1,26 +1,15 @@
 class Answer {
-    constructor(containerId, countInputId) {
+    constructor(containerId) {
         this.container = document.getElementById(containerId);
-        this.countInput = document.getElementById(countInputId);
         this.arrAn = [];
-        this.isCorrect=[];
-
+        this.isCorrect = [];
     }
 
     addInputs() {
-    // const count = parseInt(this.countInput.value);
+        const i = this.arrAn.length; // индекс нового ответа
 
-    // if (!count || count < 1 || count > 10) {
-    //     alert("Введите число от 1 до 10");
-    //     return;
-    // }
-    this.arrAn = new Array(count).fill("");
-    this.isCorrect = new Array(count).fill(false);
-
-    this.isCorrect.fill(false);
-    this.container.innerHTML = "";
-
-    // for (let i = 0; i < count; i++) {
+        this.arrAn.push("");
+        this.isCorrect.push(false);
 
         const wrapper = document.createElement("div");
         wrapper.classList.add("answer-row");
@@ -39,39 +28,28 @@ class Answer {
         button.classList.add("correct-btn");
 
         button.addEventListener("click", () => {
-            this.isCorrect[i] = true;
+            // сбрасываем все
+            this.isCorrect.fill(false);
 
             document
                 .querySelectorAll(".correct-btn")
                 .forEach(btn => btn.classList.remove("active"));
 
+            // активируем текущий
+            this.isCorrect[i] = true;
             button.classList.add("active");
         });
 
         wrapper.appendChild(input);
         wrapper.appendChild(button);
         this.container.appendChild(wrapper);
-    // }
-}
+    }
 
     getValue() {
         return this.arrAn;
     }
 
-    getRight(){
+    getRight() {
         return this.isCorrect;
     }
 }
-
-
-    // async toDatabase(answer) {
-    //     const { error } = await supabase
-    //         .from('QuestionAnswer')
-    //         .update({ Answer: answer })
-    //         .eq("id", currentQuestionId);
-
-    //     if (error) {
-    //         alert("Ошибка сохранения ответа: " + error.message);
-    //     }
-    // }
-// }
