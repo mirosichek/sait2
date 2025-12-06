@@ -65,7 +65,7 @@ class Database {
 
     resetForm() {
     document.getElementById("myQuestion").value = "";
-    document.getElementById("inputCount").value = "";
+    document.getElementById("myQuestionID").value = "";
 
     document.getElementById("inputAnsverContainer").innerHTML = "";
 
