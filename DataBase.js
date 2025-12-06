@@ -24,17 +24,18 @@ class Database {
         const q = this.question.getValue();
         const a = this.answer.getValue();
         const r=this.answer.getRight();
+        const f =this.question.getQID();
 
-        await this.qtoDatabase(q);
+        await this.qtoDatabase(q, f);
         await this.atoDatadase(a, r);
 
         this.resetForm();
     }
 
-    async qtoDatabase(question){
+    async qtoDatabase(question, flag){
         const { data, error } = await supabase
             .from('Questions')
-            .insert({ Question: question })
+            .insert({ Question: question, Flag: flag })
             .select("id")
             .single();
 
@@ -75,40 +76,3 @@ class Database {
 }
 
 
-// input.addEventListener("keydown", async (event) => {
-//                 if (event.key === "Enter") {
-
-//                     if (!currentQuestionId) {
-//                         alert("Сначала напишите вопрос и нажмите Enter!");
-//                         return;
-//                     }
-
-//                     const answer = event.target.value.trim();
-//                     if (!answer) return;
-
-//                     await this.toDatabase(answer);
-//                     event.target.value = "";
-//                 }
-//             });
-
-// const { data, error } = await supabase
-//                     .from('QuestionAnswer')
-//                     .insert({ Question: question })
-//                     .select("id")
-//                     .single();
-
-
-//               currentQuestionId = data.id;   // <-- сохраняем ID
-//                 event.target.value = "";
-
-//                 async toDatabase(answer) {
-//         const { error } = await supabase
-//             .from('QuestionAnswer')
-//             .update({ Answer: answer })
-//             .eq("id", currentQuestionId);
-
-//         if (error) {
-//             alert("Ошибка сохранения ответа: " + error.message);
-//         }
-//     }
-// // 
