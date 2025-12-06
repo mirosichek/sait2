@@ -53,7 +53,7 @@ class Database {
                 .insert({
                     Answer: answer[i],
                     Question: this.currentQuestionId,
-                    Right: this.right[i]
+                    Right: right[i]
                 });
 
             if (error) {
@@ -61,6 +61,17 @@ class Database {
             }
         }
     }
+
+    resetForm() {
+    document.getElementById("myQuestion").value = "";
+    document.getElementById("inputCount").value = "";
+
+    document.getElementById("inputAnsverContainer").innerHTML = "";
+
+    answer.arrAn = [];
+    answer.isCorrect = [];
+}
+
 }
 
 

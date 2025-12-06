@@ -14,6 +14,8 @@ class Answer {
         alert("Введите число от 1 до 10");
         return;
     }
+    this.arrAn = new Array(count).fill("");
+    this.isCorrect = new Array(count).fill(false);
 
     this.isCorrect.fill(false);
     this.container.innerHTML = "";
