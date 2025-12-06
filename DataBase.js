@@ -28,7 +28,7 @@ class Database {
         await this.qtoDatabase(q);
         await this.atoDatadase(a, r);
 
-        resetForm();
+        this.resetForm();
     }
 
     async qtoDatabase(question){
