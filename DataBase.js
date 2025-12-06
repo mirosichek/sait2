@@ -26,8 +26,8 @@ class Database {
         const r=this.answer.getRight();
         const f =this.question.getQID();
 
-        await this.qtoDatabase(q, f);
-        await this.atoDatadase(a, r);
+        const questionId = await this.qtoDatabase(q, f);
+        await this.atoDatadase(a, r, questionId);
 
         this.resetForm();
     }
@@ -44,16 +44,16 @@ class Database {
             return;
         }
 
-        this.currentQuestionId = data.id;
+        return data.id;
     }
 
-    async atoDatadase(answer, right){
-        for (let i = 0; i < answer.length; i++) {
+    async atoDatadase(answersList, right, questionId){
+        for (let i = 0; i < answersList.length; i++) {
             const { error } = await supabase
                 .from('QuestionAnswer')
                 .insert({
-                    Answer: answer[i],
-                    Question: this.currentQuestionId,
+                    Answer: answersList[i],
+                    Question: questionId,
                     Right: right[i]
                 });
 
@@ -64,15 +64,14 @@ class Database {
     }
 
     resetForm() {
-    document.getElementById("myQuestion").value = "";
-    document.getElementById("myQuestionID").value = "";
+        document.getElementById("myQuestion").value = "";
+        document.getElementById("myQuestionID").value = "";
 
-    document.getElementById("inputAnsverContainer").innerHTML = "";
+        document.getElementById("inputAnsverContainer").innerHTML = "";
 
-    answer.arrAn = [];
-    answer.isCorrect = [];
-}
-
+        answer.arrAn = [];
+        answer.isCorrect = [];
+    }
 }
 
 
