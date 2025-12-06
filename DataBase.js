@@ -23,9 +23,10 @@ class Database {
     async save() {
         const q = this.question.getValue();
         const a = this.answer.getValue();
+        const r=this.answer.getRight();
 
         await this.qtoDatabase(q);
-        await this.atoDatadase(a);
+        await this.atoDatadase(a, r);
 
         resetForm();
     }
@@ -45,13 +46,14 @@ class Database {
         this.currentQuestionId = data.id;
     }
 
-    async atoDatadase(answer){
+    async atoDatadase(answer, right){
         for (let i = 0; i < answer.length; i++) {
             const { error } = await supabase
                 .from('QuestionAnswer')
                 .insert({
                     Answer: answer[i],
-                    Question: this.currentQuestionId
+                    Question: this.currentQuestionId,
+                    Right: this.right[i]
                 });
 
             if (error) {
