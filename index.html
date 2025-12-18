@@ -12,23 +12,32 @@
 </head>
 
 <body>
-<button onclick="control.handleSave()">Сохранить в базу данных</button>
+    <div id="mainScreen">
+    <button id="createPollBtn">Создать опрос</button>
+    <button id="anotherBtn">Другое действие</button>
+</div>
 
-<div id="qa">
-    <h3>Индикатор вопроса:</h3>
-    <input type="text" id="myQuestionID" placeholder="Напишите индикатор вопроса...">
+<div id="createQuestionScreen" style="display:none;"> 
+    <button onclick="control.handleSave()">Сохранить в базу данных</button>
 
-    <h3>Вопрос:</h3>
-    <input type="text" id="myQuestion" placeholder="Напишите вопрос...">
+    <div id="qa">
+        <h3>Индикатор вопроса:</h3>
+        <input type="text" id="myQuestionID" placeholder="Напишите индикатор вопроса...">
 
-    <h3>Варианты ответа:</h3>
-    <div id="inputAnsverContainer"></div>
+        <h3>Вопрос:</h3>
+        <input type="text" id="myQuestion" placeholder="Напишите вопрос...">
 
-    <button onclick="answer.addInputs()">Добавить поле</button>
+        <h3>Варианты ответа:</h3>
+        <div id="inputAnsverContainer"></div>
+
+        <button onclick="answer.addInputs()">Добавить поле</button>
+    </div>
+</div>
 
 
 
     <script defer src="DatabaseService.js"></script>
+    <script defer src="ScreenController.js"></script>
     <script defer src="FormController.js"></script>
     <script defer src="Question.js"></script>
     <script defer src="Answer.js"></script>
