@@ -69,8 +69,8 @@ class Database {
 
         document.getElementById("inputAnsverContainer").innerHTML = "";
 
-        answer.arrAn = [];
-        answer.isCorrect = [];
+        this.answer.arrAn = [];
+        this.answer.isCorrect = [];
     }
 }
 
