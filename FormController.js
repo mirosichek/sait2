@@ -1,6 +1,4 @@
-import { DatabaseService } from "./DatabaseService.js";
-
-export class FormController {
+class FormController {
     constructor(containerId, question, answer) {
         this.container = document.getElementById(containerId);
         this.question = question;

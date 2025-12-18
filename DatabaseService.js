@@ -3,7 +3,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const { createClient } = supabase;
 const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
-export class DatabaseService {
+class DatabaseService {
     async saveQuestion(question, flag) {
         const { data, error } = await supabaseClient
             .from('Questions')
