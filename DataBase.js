@@ -1,6 +1,8 @@
 const supabaseUrl = 'https://zxdprwvrgzqpxyvxksud.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4ZHByd3ZyZ3pxcHh5dnhrc3VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MDI5NjQsImV4cCI6MjA3OTA3ODk2NH0.Rd8UXhHz97ifIrSezDkcBNzBn18_wAVtY_mUVCf32FE';
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+const { createClient } = supabase;
+const supabaseClient = createClient(supabaseUrl, supabaseKey);
+// const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 class Database {
     constructor(containerId, question, answer) {
@@ -32,7 +34,7 @@ class Database {
     }
 
     async qtoDatabase(question, flag){
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('Questions')
             .insert({ Question: question, Flag: flag })
             .select("id")
@@ -48,7 +50,7 @@ class Database {
 
     async atoDatadase(answersList, right, questionId){
         for (let i = 0; i < answersList.length; i++) {
-            const { error } = await supabase
+            const { error } = await supabaseClient
                 .from('QuestionAnswer')
                 .insert({
                     Answer: answersList[i],
