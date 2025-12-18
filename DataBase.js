@@ -21,13 +21,13 @@ class Database {
     }
 
     async save() {
-        const q = this.question.getValue();
-        const a = this.answer.getValue();
-        const r=this.answer.getRight();
-        const f =this.question.getQID();
+        const question_to_save = this.question.getValue();
+        const answer_arr = this.answer.getValue();
+        const righit_answer=this.answer.getRight();
+        const flag =this.question.getQID();
 
-        const questionId = await this.qtoDatabase(q, f);
-        await this.atoDatadase(a, r, questionId);
+        const questionId = await this.qtoDatabase(question_to_save, flag);
+        await this.atoDatadase(answer_arr, righit_answer, questionId);
 
         this.resetForm();
     }
