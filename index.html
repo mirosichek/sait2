@@ -12,9 +12,18 @@
 </head>
 
 <body>
-    <div id="mainScreen">
+<div id="mainScreen">
     <button id="createPollBtn">Создать опрос</button>
+    <button id="createTeams">Создать команды</button>
     <button id="anotherBtn">Другое действие</button>
+</div>
+
+<div id="createTeamScrean" style="display:none;">
+    <h3>Введите название команды:</h3>
+    <div id="inputTeamContainer"></div>
+    <button id="addTeamBtn"  onclick="teamCreator.addTeams()">Добавить команду</button>
+    <button id="saveTeamsBtn" onclick="teamControl.handleSave()">Сохранить команды</button>
+    <button id="backTeamsBtn">Назад</button>
 </div>
 
 <div id="createQuestionScreen" style="display:none;"> 
@@ -36,11 +45,8 @@
     <button id = "backBtn" >Назад</button>
 </div>
 
-
-
-
-
     <script defer src="DatabaseService.js"></script>
+    <script defer src="CreateTeam.js"></script>
     <script defer src="ScreenController.js"></script>
     <script defer src="FormController.js"></script>
     <script defer src="Question.js"></script>

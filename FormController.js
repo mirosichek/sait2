@@ -42,3 +42,31 @@ class FormController {
         this.answer.isCorrect = [];
     }
 }
+
+class FormControllerTeam extends FormController {
+    constructor(containerId, teamCreator) {
+        super(containerId); 
+        this.teamCreator = teamCreator;
+        this.db = new DatabaseService();
+    }
+
+    async handleSave() {
+        try {
+            const teams = this.teamCreator.getTeams();
+            const numbers = this.teamCreator.getNumbers();
+
+            if (teams.length === 0) {
+                alert("Добавьте хотя бы одну команду");
+                return;
+            }
+
+            await this.db.saveTeams(teams, numbers);
+            this.teamCreator.reset();
+
+            alert("Команды успешно сохранены!");
+        } catch (err) {
+            alert(err.message);
+        }
+    }
+}
+

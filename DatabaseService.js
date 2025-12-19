@@ -33,4 +33,19 @@ class DatabaseService {
             }
         }
     }
+
+    async saveTeams(teams, number){
+        for(let i=0; i<teams.length; i++){
+            const { error } = await supabaseClient
+                .from('Teams')
+                .insert({
+                    team: teams[i],
+                    number_of_people:number[i]
+                });
+
+            if (error) {
+                throw new Error("Ошибка сохранения ответа: " + error.message);
+            }
+        }
+    }
 }

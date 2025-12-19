@@ -40,3 +40,10 @@ button {
     background-color: #4caf50;
     color: white;
 }
+
+.team-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
