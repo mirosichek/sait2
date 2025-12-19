@@ -19,6 +19,10 @@ class ScreenController {
         document.getElementById("backBtn").addEventListener("click", () => {
             this.showMainScreen();
         });
+
+        document.getElementById("backTeamsBtn").addEventListener("click", ()=> {
+            this.showMainScreen();
+        })
     }
 
     showMainScreen() {

@@ -68,5 +68,9 @@ class FormControllerTeam extends FormController {
             alert(err.message);
         }
     }
+
+     resetForm() {
+        document.getElementById("inputTeamContainer").value="";
+     }
 }
 

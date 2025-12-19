@@ -43,7 +43,21 @@ button {
 
 .team-row {
     display: flex;
+    align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
+
+.team-input {
+    width: 180px; 
+    padding: 10px;
+    font-size: 16px;
+}
+
+.team-number {
+    width: 100px;
+    padding: 10px;
+    font-size: 16px;
+}
+
 

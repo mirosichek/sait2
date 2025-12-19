@@ -17,10 +17,12 @@ class CreateTeam {
         this.numberPeopleArr.push(0);
 
         const wrapper = document.createElement("div");
+        wrapper.classList.add("team-row");
 
         const teamInput = document.createElement("input");
         teamInput.type = "text";
         teamInput.placeholder = `Команда ${i + 1}`;
+        teamInput.classList.add("team-input");
 
         teamInput.addEventListener("input", () => {
             this.teamArr[i] = teamInput.value.trim();
@@ -29,7 +31,8 @@ class CreateTeam {
         const numberInput = document.createElement("input");
         numberInput.type = "number";
         numberInput.min = 1;
-        numberInput.placeholder = "Кол-во людей";
+        numberInput.placeholder = "Людей";
+        numberInput.classList.add("team-number");
 
         numberInput.addEventListener("input", () => {
             this.numberPeopleArr[i] = Number(numberInput.value);
