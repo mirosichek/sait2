@@ -2,39 +2,39 @@ class ScreenController {
     constructor() {
         this.mainScreen = document.getElementById("mainScreen");
         this.createQuestionScreen = document.getElementById("createQuestionScreen");
-        this.createTeamScreen = document.getElementById("createTeamScrean");
+        this.createTeamScreen = document.getElementById("createTeamScreen");
         this.showScreen=document.getElementById("showInfoScreen");
 
         this.initEvents();
     }
 
     initEvents() {
-        document.getElementById("createPollBtn").addEventListener("click", () => {
-            this.showCreateQuestionScreen();
-        });
+    document.getElementById("createPollBtn").addEventListener("click", () => {
+        this.showCreateQuestionScreen();
+    });
 
-        document.getElementById("createTeams").addEventListener("click", () => {
-            this.showCreateTeamScreen();
-        });
+    document.getElementById("createTeamsBtn").addEventListener("click", () => {
+        this.showCreateTeamScreen();
+    });
 
-        document.getElementById("backBtn").addEventListener("click", () => {
-            this.showMainScreen();
-        });
-
-        document.getElementById("backTeamsBtn").addEventListener("click", ()=> {
-            this.showMainScreen();
-        })
-
-        document.getElementById("backShowBtn").addEventListener("click", ()=> {
-            this.showMainScreen();
-        })
-
-        document.getElementById("showInfoScreen").addEventListener("click", async () => {
+    document.getElementById("ShowInfo").addEventListener("click", async () => {
         this.showShowScreen();
         await window.ShowData.loadAndRender();
-        });
+    });
 
-    }
+    document.getElementById("backBtn").addEventListener("click", () => {
+        this.showMainScreen();
+    });
+
+    document.getElementById("backTeamsBtn").addEventListener("click", () => {
+        this.showMainScreen();
+    });
+
+    document.getElementById("backShowBtn").addEventListener("click", () => {
+        this.showMainScreen();
+    });
+}
+
 
     showMainScreen() {
         this.mainScreen.style.display = "block";

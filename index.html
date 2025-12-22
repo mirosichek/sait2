@@ -14,12 +14,12 @@
 <body>
 <div id="mainScreen">
     <button id="createPollBtn">Создать опрос</button>
-    <button id="createTeams">Создать команды</button>
+    <button id="createTeamsBtn">Создать команды</button>
     <button id="ShowInfo">Показать команды</button>
     <button id="anotherBtn">Другое действие</button>
 </div>
 
-<div id="createTeams" style="display:none;">
+<div id="createTeamScreen" style="display:none;">
     <h3>Введите название команды:</h3>
     <div id="inputTeamContainer"></div>
     <button id="addTeamBtn"  onclick="teamCreator.addTeams()">Добавить команду</button>
@@ -57,7 +57,7 @@
     <script defer src="FormController.js"></script>
     <script defer src="Question.js"></script>
     <script defer src="Answer.js"></script>
-    <script defer scr="show.js"></script>
+    <script defer src="show.js"></script>
     <script defer src="main.js"></script>
 
 </div>
