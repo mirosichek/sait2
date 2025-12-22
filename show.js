@@ -28,13 +28,14 @@ class ShowDataServise {
                 empty.textContent = 'Нет участников';
                 teamBlock.appendChild(empty);
             } else {
+                let i = 1;
                 team.people.forEach(person => {
                     const p = document.createElement('p');
-                    p.textContent = `— ${person.name} ${person.surname}: ${person.score}`;
+                    p.textContent = `${i} ${person.name} ${person.surname}: ${person.score}`;
                     teamBlock.appendChild(p);
+                    i++;
                 });
             }
-
             container.appendChild(teamBlock);
         });
     }
