@@ -48,4 +48,29 @@ class DatabaseService {
             }
         }
     }
+
+    async getTeamsWithPeople() {
+        const { data: teams, error: teamsError } = await supabaseClient
+            .from('Teams')
+            .select('*');
+
+        if (teamsError) {
+            throw new Error('Ошибка получения команд: ' + teamsError.message);
+        }
+
+        for (let team of teams) {
+            const { data: people, error: peopleError } = await supabaseClient
+                .from('QuizDatabase')
+                .select('name, surname, score')
+                .eq('group', team.id); 
+
+            if (peopleError) {
+                throw new Error('Ошибка получения людей: ' + peopleError.message);
+            }
+
+            team.people = people;
+        }
+
+        return teams;
+    }
 }

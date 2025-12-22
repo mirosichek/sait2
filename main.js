@@ -5,6 +5,7 @@ window.control = new FormController("qa", question, answer);
 
 window.teamCreator = new CreateTeam("inputTeamContainer");
 window.teamControl = new FormControllerTeam("createTeamScrean", teamCreator);
+window.ShowData = new ShowDataServise(window.db);
 
 window.screenController = new ScreenController();
 

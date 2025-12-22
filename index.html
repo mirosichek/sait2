@@ -15,6 +15,7 @@
 <div id="mainScreen">
     <button id="createPollBtn">Создать опрос</button>
     <button id="createTeams">Создать команды</button>
+    <button id="ShowInfo">Показать команды</button>
     <button id="anotherBtn">Другое действие</button>
 </div>
 
@@ -24,6 +25,11 @@
     <button id="addTeamBtn"  onclick="teamCreator.addTeams()">Добавить команду</button>
     <button id="saveTeamsBtn" onclick="teamControl.handleSave()">Сохранить команды</button>
     <button id="backTeamsBtn">Назад</button>
+</div>
+
+<div id="showInfoScreen" style="display:none;"> 
+    <button id="backShowBtn">Назад</button>
+    <div id="teamsContainer"></div>
 </div>
 
 <div id="createQuestionScreen" style="display:none;"> 
