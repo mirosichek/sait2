@@ -29,7 +29,7 @@ class ScreenController {
             this.showMainScreen();
         })
 
-        document.getElementById("ShowInfo").addEventListener("click", async () => {
+        document.getElementById("showInfoScreen").addEventListener("click", async () => {
         this.showShowScreen();
         await window.ShowData.loadAndRender();
         });
