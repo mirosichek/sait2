@@ -6,7 +6,7 @@ class Answer {
     }
 
     addInputs() {
-        const i = this.arrAn.length; // индекс нового ответа
+        const i = this.arrAn.length; 
 
         this.arrAn.push("");
         this.isCorrect.push(false);
@@ -28,14 +28,12 @@ class Answer {
         button.classList.add("correct-btn");
 
         button.addEventListener("click", () => {
-            // сбрасываем все
             this.isCorrect.fill(false);
 
             document
                 .querySelectorAll(".correct-btn")
                 .forEach(btn => btn.classList.remove("active"));
 
-            // активируем текущий
             this.isCorrect[i] = true;
             button.classList.add("active");
         });
