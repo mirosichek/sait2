@@ -62,8 +62,7 @@ class DatabaseService {
             const { data: people, error: peopleError } = await supabaseClient
                 .from('QuizDatabase')
                 .select('name, surname, score')
-                .eq('group_id', team.id)
-                .execute();
+                .eq('group_id', team.id);
             
 
             if (peopleError) {
