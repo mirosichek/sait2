@@ -67,12 +67,12 @@ class DatabaseService {
             
 
             if (peopleError) {
-                throw new Error('Ошибка получения людей: ' + peopleError.message);
+                console.error('Ошибка людей для команды', team.id, peopleError);
+                team.people = [];
+            } else {
+                team.people = people || [];
             }
-
-            team.people = people;
         }
-
         return teams;
     }
 }
